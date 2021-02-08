@@ -1,10 +1,10 @@
 
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('product').del()
+  return knex('products').del()
     .then(function () {
       // Inserts seed entries
-      return knex('product').insert([
+      return knex('products').insert([
         {
           name: 'Organic Linen Trousers',
           collection: 'Organic Linen Collection',

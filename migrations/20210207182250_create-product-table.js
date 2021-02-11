@@ -4,6 +4,7 @@ exports.up = function(knex) {
         table.increments()
         table.string('name')
         table.string('collection')
+        table.text('description')
         table.string('image')
         table.integer('price')
     })

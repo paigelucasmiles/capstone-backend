@@ -3,6 +3,7 @@ const app = express();
 const port = process.env.PORT || 4000
 const cors = require('cors');
 const database = require('./database/database');
+require('dotenv').config()
 
 const { Model } = require('objection');
 Model.knex(database)

@@ -5,9 +5,9 @@ exports.seed = function(knex) {
     .then(function () {
       // Inserts seed entries
       return knex('cart').insert([
-        {productId: 33, productColor: "white", productSize: "small", productQuantity: 1},
-        {productId: 34, productColor: "green", productSize: "medium", productQuantity: 2},
-        {productId: 35, productColor: "blue", productSize: "large", productQuantity: 3},
+        {productId: 17, productColor: "white", productSize: "small", productQuantity: 1},
+        {productId: 18, productColor: "green", productSize: "medium", productQuantity: 2},
+        {productId: 19, productColor: "blue", productSize: "large", productQuantity: 3},
       ]);
     });
 };

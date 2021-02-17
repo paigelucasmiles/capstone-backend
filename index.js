@@ -116,6 +116,7 @@ app.get('/products', (request, response) => {
 
 app.get('/cart', (request, response) => {
     Cart.query()
+        .orderBy('productId', 'productColor', 'productSize')
         .then(item => response.json({ item }));
 })
 
@@ -140,8 +141,6 @@ app.post('/cart', (request, response) => {
 app.put('/updateCart', (request, response) => {
     const { itemToUpdate } = request.body
 
-    console.log(itemToUpdate)
-
     Cart.query()
         .update({
             id: itemToUpdate.id,
@@ -152,6 +151,7 @@ app.put('/updateCart', (request, response) => {
         })
         .where('id', itemToUpdate.id)
         .returning('*')
+        .first()
         .then(items => response.json(items))
 
     // find in the cart table the item with id, color, size

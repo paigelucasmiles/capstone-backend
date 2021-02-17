@@ -119,4 +119,46 @@ app.get('/cart', (request, response) => {
         .then(item => response.json({ item }));
 })
 
+app.post('/cart', (request, response) => {
+    const { product } = request.body
+
+    return Cart.query().insert({
+        productId: product.id, 
+        productColor: product.color, 
+        productSize: product.size, 
+        productQuantity: product.quantity
+    }).returning("*")
+    .then(products => {
+        const product = products
+
+        response.json(product)
+    }).catch(error => {
+        response.json({ error: error.message })
+    })
+})
+
+app.put('/updateCart', (request, response) => {
+    const { itemToUpdate } = request.body
+
+    console.log(itemToUpdate)
+
+    Cart.query()
+        .update({
+            id: itemToUpdate.id,
+            productColor: itemToUpdate.productColor,
+            productId: itemToUpdate.productId,
+            productQuantity: itemToUpdate.productQuantity,
+            productSize: itemToUpdate.productSize
+        })
+        .where('id', itemToUpdate.id)
+        .returning('*')
+        .then(items => response.json(items))
+
+    // find in the cart table the item with id, color, size
+
+    // if newQty == 0, delete that from the cart table
+
+    // else update that row in the cart table with newQty
+})
+
 app.listen(4000, () => console.log(`CORS-enabled web server listening on ${port}`));
